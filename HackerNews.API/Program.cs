@@ -1,9 +1,17 @@
+using HackerNews.Features;
+using HackerNews.ServiceDefaults;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen();
+
+builder.Services
+    .AddHackerNewsClient()
+    .AddScoped<BestStoriesHandler>();
 
 var app = builder.Build();
 
