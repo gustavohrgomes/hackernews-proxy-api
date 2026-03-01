@@ -6,5 +6,10 @@
     <Project Path="HackerNews.API/HackerNews.API.csproj" />
     <Project Path="HackerNews.AppHost/HackerNews.AppHost.csproj" Id="9e00b18a-fccf-4979-a143-8f9c7b16021b" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".dockerignore" />
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+  </Folder>
   <Folder Name="/Tests/" />
 </Solution>
