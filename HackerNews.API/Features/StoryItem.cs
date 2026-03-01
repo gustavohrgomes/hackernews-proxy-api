@@ -7,4 +7,4 @@ public record StoryItem(
     int Score,
     string By,
     long Time,
-    int Descendents);
+    int Descendants);

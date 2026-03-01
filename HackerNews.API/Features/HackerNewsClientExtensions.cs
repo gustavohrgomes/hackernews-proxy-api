@@ -4,7 +4,7 @@ public static class HackerNewsClientExtensions
 {
     public static IServiceCollection AddHackerNewsClient(this IServiceCollection services)
     {
-        services.AddHttpClient("HackerNews", client =>
+        services.AddHttpClient("HackerNewsApi", client =>
         {
             client.BaseAddress = new Uri("https://hacker-news.firebaseio.com/v0/");
         });

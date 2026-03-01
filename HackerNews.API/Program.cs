@@ -1,3 +1,4 @@
+using HackerNews.ExceptionHandlers;
 using HackerNews.Features;
 using HackerNews.ServiceDefaults;
 
@@ -10,12 +11,21 @@ builder.Services
     .AddSwaggerGen();
 
 builder.Services
+    .AddMemoryCache()
+    .AddOutputCache(options =>
+    {
+        options.AddBasePolicy(build => build.Expire(TimeSpan.FromSeconds(15)));
+    })
     .AddHackerNewsClient()
-    .AddScoped<BestStoriesHandler>();
+    .AddScoped<BestStoriesHandler>()
+    .AddExceptionHandler<HackerNewsExceptionHandler>()
+    .AddProblemDetails();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
+app
+    .MapDefaultEndpoints()
+    .MapBestStoriesEndpoint();
 
 if (app.Environment.IsDevelopment())
 {
@@ -24,5 +34,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseOutputCache();
 
 app.Run();
