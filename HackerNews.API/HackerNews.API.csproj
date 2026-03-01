@@ -13,11 +13,11 @@
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
         <AnalysisLevel>latest-all</AnalysisLevel>
         <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
         <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile> -->
     </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.1.4" />

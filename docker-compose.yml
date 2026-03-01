@@ -1,0 +1,6 @@
+services:
+  hackernews.api:
+    image: ${DOCKER_REGISTRY-}hackernewsapi
+    build:
+      context: .
+      dockerfile: HackerNews.API/Dockerfile

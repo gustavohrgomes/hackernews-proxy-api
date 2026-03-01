@@ -11,5 +11,10 @@
     <File Path=".editorconfig" />
     <File Path=".gitignore" />
   </Folder>
-  <Folder Name="/Tests/" />
+  <Folder Name="/Tests/">
+    <Project Path="HackerNews.Tests/HackerNews.Tests.csproj" />
+  </Folder>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
 </Solution>
