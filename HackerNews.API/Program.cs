@@ -7,6 +7,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 builder.Services
+    .AddOptionsWithValidateOnStart<HackerNewsApiOptions>()
+    .BindConfiguration(HackerNewsApiOptions.SectionName)
+    .ValidateDataAnnotations();
+
+builder.Services
+    .AddOptionsWithValidateOnStart<CacheOptions>()
+    .BindConfiguration(CacheOptions.SectionName)
+    .ValidateDataAnnotations();
+
+var cacheOptions = builder.Configuration.GetSection(CacheOptions.SectionName).Get<CacheOptions>() ?? new CacheOptions();
+
+builder.Services
     .AddEndpointsApiExplorer()
     .AddSwaggerGen();
 
@@ -14,7 +26,7 @@ builder.Services
     .AddMemoryCache()
     .AddOutputCache(options =>
     {
-        options.AddBasePolicy(build => build.Expire(TimeSpan.FromSeconds(15)));
+        options.AddBasePolicy(build => build.Expire(TimeSpan.FromSeconds(cacheOptions.OutputCacheTtlSeconds)));
     })
     .AddHackerNewsClient()
     .AddScoped<BestStoriesHandler>()

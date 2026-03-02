@@ -1,12 +1,15 @@
+using Microsoft.Extensions.Options;
+
 namespace HackerNews.Features;
 
 public static class HackerNewsClientExtensions
 {
     public static IServiceCollection AddHackerNewsClient(this IServiceCollection services)
     {
-        services.AddHttpClient("HackerNewsApi", client =>
+        services.AddHttpClient("HackerNewsApi", (sp, client) =>
         {
-            client.BaseAddress = new Uri("https://hacker-news.firebaseio.com/v0/");
+            var options = sp.GetRequiredService<IOptions<HackerNewsApiOptions>>().Value;
+            client.BaseAddress = new Uri(options.BaseUrl);
         });
 
         services.AddScoped<HackerNewsClient>();

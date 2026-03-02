@@ -2,6 +2,7 @@ using FluentAssertions;
 using HackerNews.Features;
 using HackerNews.Tests.Helpers;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Options;
 using NSubstitute;
 
 namespace HackerNews.Tests.Features;
@@ -23,7 +24,8 @@ public class BestStoriesHandlerTests : IDisposable
         factory.CreateClient("HackerNewsApi").Returns(client);
 
         var hackerNewsClient = new HackerNewsClient(factory);
-        _sut = new BestStoriesHandler(hackerNewsClient, _cache);
+        var cacheOptions = Options.Create(new CacheOptions());
+        _sut = new BestStoriesHandler(hackerNewsClient, _cache, cacheOptions);
     }
 
     public void Dispose() => _cache.Dispose();
