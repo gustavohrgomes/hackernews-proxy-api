@@ -48,4 +48,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseOutputCache();
 
+app.UseExceptionHandler();
+
 app.Run();
